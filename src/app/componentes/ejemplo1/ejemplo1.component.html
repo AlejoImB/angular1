@@ -1,0 +1,66 @@
+<mat-card class="tarjeta-shiba">
+  <mat-card-header>
+    <div mat-card-avatar class="imagen-cabecera-shiba"></div>
+    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>Raza de Perro</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="imagenDelPadre || imagen" alt="Foto de un Shiba Inu">
+  <mat-card-content>
+    <p>
+      El Shiba Inu es el más pequeño de las seis razas originales y distintas de perro spitz de Japón.
+      Un perro pequeño y ágil que se adapta muy bien al terreno montañoso, el Shiba Inu fue originalmente
+      criado para la caza.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="alerta(entrada.value)">Ir al Lado Oscuro</button>
+    <button mat-raised-button color="accent" (click)="emisor.emit(entrada.value)">COMPARTIR</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-divider class="my-4"></mat-divider>
+
+<mat-card class="tarjeta-nombre">
+  <mat-card-header>
+    <mat-card-title>Ejemplos de Estructuras de Control y Enlace Bidireccional</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field appearance="outline" class="ancho-completo">
+      <mat-label>Ingrese su nombre</mat-label>
+      <input matInput [(ngModel)]="nombre" #entrada placeholder="Ingrese su nombre completo">
+      <mat-icon matSuffix>fingerprint</mat-icon>
+      <mat-hint>Por favor, ingrese su nombre completo</mat-hint>
+    </mat-form-field>
+
+    <div class="salida-nombre mt-4">
+      <h2>Nombre ingresado: {{nombre}}</h2>
+      
+      @if (nombre === 'Darth Vader') {
+        <h3 class="texto-advertencia">¡No vayas al lado oscuro!</h3>
+      } @else if (nombre.length > 0) {
+        <h3>Hola, {{nombre}}!</h3>
+      }
+
+      <div *ngIf="nombre === 'Darth Vader'" class="advertencia-darth-vader">
+        <h3>Nunca podrás volver de él</h3>
+        <h3>¿Por qué lo hiciste?</h3>
+      </div>
+    </div>
+
+    <div class="lista-nombres mt-4">
+      <h3>Lista de Nombres:</h3>
+      <ul>
+        @for (item of nombres; track $index) {
+          <li>Hola, {{item.nombre}}</li>
+        }
+      </ul>
+      
+      <h3>Nombres (sintaxis antigua):</h3>
+      <ul>
+        <li *ngFor="let iteradora of nombres">
+          Hola desde la forma antigua: {{iteradora.nombre}}
+        </li>
+      </ul>
+    </div>
+  </mat-card-content>
+</mat-card>
